@@ -1,0 +1,407 @@
+.navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar li {
+    display: inline-block;
+  }
+  
+  .navbar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .navbar a:hover {
+    background-color: #333;
+    color: #fff;
+  }
+
+.pagination {
+  display: inline-block;
+}
+
+.page-item {
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 0 !important;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+}
+
+.page-item.active .page-link {
+  color: #fff;
+  background-color: #333;
+  border-color: #333;
+}
+
+
+.page-link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 0.75rem;
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+
+.page-link:focus, .page-link:hover {
+  z-index: 2;
+  color: #333;
+  text-decoration: none;
+  background-color: #cacccf;
+  border-color: #dee2e6;
+}
+
+.page-link:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.page-link.disabled, .page-link[disabled] {
+  pointer-events: none;
+  cursor: auto;
+  color: #6c757d;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+.coin-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.coin-list li {
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.coin-list li p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.coin-list li ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.coin-list li ul li {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.coin-list li ul li:last-child {
+  margin-right: 0;
+}
+
+.coin-list li ul li:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.coin-list li ul li:nth-child(1):before {
+  background-color: #007bff;
+}
+
+.coin-list li ul li:nth-child(2):before {
+  background-color: #28a745;
+}
+
+.coin-list li ul li:nth-child(3):before {
+  background-color: #dc3545;
+}
+
+.coin-list li ul li:nth-child(4):before {
+  background-color: #6c757d;
+}
+
+.coin-list li ul li:last-child {
+  margin-right: 0;
+}
+
+.coin-list li img {
+  max-width: 50px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.exchange-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  }
+
+.exchange-list li {
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.exchange-list li p {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.exchange-list li ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.exchange-list li ul li {
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.exchange-list li ul li:last-child {
+  margin-right: 0;
+}
+
+.exchange-list li ul li:before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.exchange-list li ul li:nth-child(1):before {
+  background-color: #007bff;
+}
+
+.exchange-list li ul li:nth-child(2):before {
+  background-color: #28a745;
+}
+
+.exchange-list li ul li:nth-child(3):before {
+  background-color: #dc3545;
+}
+
+
+.exchange-list li ul li:last-child {
+  margin-right: 0;
+}
+
+.exchange-list li img {
+  max-width: 25px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.sr-only {
+  display: none;
+}
+
+a {
+  color: rgb(46, 46, 46);
+  text-decoration: none;
+  transition: opacity 0.2s ease-in-out;
+}
+
+a:hover {
+  color: #bcc3c9;
+}
+/* Заголовок монети */
+.coin {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-bottom: 2rem;
+  padding-left: 0;
+}
+
+.coin li {
+  margin-right: 2rem;
+}
+
+.coin img {
+  max-width: 25px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+/* Таблиця з біржами */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #333;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+tr td img{
+  max-width: 25px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+td.id-column {
+  width: 0px;
+}
+.search-container {
+  float: right;
+}
+
+.search-container input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 120px;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+#search-results {
+  position: absolute;
+  background: white
+}
+.footer {
+  display: flex;
+  padding: 0rem;
+}
+
+.social-links ul,
+.donate ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.social-links img,
+.donate img {
+  height: 1rem;
+  margin-right: 0.5rem;
+}
+
+.social-links li,
+.donate li {
+  font-size: 0.8rem;
+  margin: 0.5rem;
+}
+
+.converter {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 19.5px;
+  width: 400px;
+  margin: 10px;
+  float: left;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  flex-grow: 1;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  appearance: none;
+}
+
+.currency-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10px;
+  width: 80px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.symbol {
+    color: darkgrey;
+    font-size: x-small;
+}
+
+.all-time-high {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.max-supply {
+    font-size: 14px;
+    color: #555;
+}
+
+.circulating-supply {
+    font-size: 14px;
+    color: #555;
+}
+
+.market-cap {
+    font-size: 14px;
+    color: #555;
+}
+
+.ath{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 14px;
+    width: 350px;
+    margin: 10px;
+    float: left;
+}

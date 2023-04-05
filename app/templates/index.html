@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<body>
+{% if all_coins_data %}
+<div>
+<!--Основна таблиця з монетами-->
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Coin</th>
+      <th>Price</th>
+      <th>1h</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>Market Cap</th>
+    </tr>
+  </thead>
+<tbody>
+    {% for all_coin, profile in all_coins_data %}
+      <tr>
+        <td class="id-column">{{ all_coin.rating }}</td>
+        <td><img src="{{profile.img_thumb}}" alt="logo"><a href="{{ url_for('coin', alias=all_coin.id_coin ) }}">
+          {{ all_coin.name }} <span class="symbol">{{all_coin.symbol.upper()}}</span></a></td>
+        <td>{% if all_coin.price < 0.01 %}
+            $ {{ '%.8f'|format(all_coin.price) }}
+            {% else %}
+            $ {{ all_coin.price | format_number }}
+            {% endif %}
+        </td>
+        {% macro price_change(value) %}
+          {% if value < 0 %}
+            <span style="color: red">{{ value | round(2) }} %</span>
+          {% elif value > 0 %}
+            <span style="color: green">{{ value | round(2) }} %</span>
+          {% else %}
+            <span>{{ value | round(2) }} %</span>
+          {% endif %}
+        {% endmacro %}
+
+        <td>{{ price_change(all_coin.usd_1h_change) }}</td>
+        <td>{{ price_change(all_coin.usd_24h_change) }}</td>
+        <td>{{ price_change(all_coin.usd_7d_change) }}</td>
+        <td>$ {{ all_coin.market_cap | format_number}}</td>
+      </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+<!--Пагінація сторінок-->
+<div class="pagination">
+  {{ pagination.links }}
+</div>
+{% else %}
+    <p>No coins found.</p>
+{% endif %}
+</body>
+{% endblock %}

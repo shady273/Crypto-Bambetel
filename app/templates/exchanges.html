@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<body>
+{% if all_exchanges %}
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Exchange</th>
+      <th>Country</th>
+      <th>Year Established</th>
+      <th>Trade Volume 24h</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for all_ex in all_exchanges %}
+      <tr>
+        <td class="id-column">{{all_ex.id}}</td>
+        <td><img src="{{all_ex.image}}" alt="logo"> <a href="{{ all_ex.url }}">{{ all_ex.name }}</a></td>
+        <td>{{all_ex.country}}</td>
+        <td>{{all_ex.year_established}}</td>
+        <td>{{ all_ex.trade_volume_24h_btc|round()|format_number}} <span class="symbol">BTC</span></td>
+      </tr>
+  {% endfor %}
+</tbody>
+</table>
+{{ pagination.links }}
+{% else %}
+    <p>No coins found.</p>
+{% endif %}
+</body>
+{% endblock %}

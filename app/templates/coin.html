@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}{{coin.name}}{% endblock %}
+
+{% block content %}
+<body>
+<!--Основна інформаційна таблиця-->
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Coin</th>
+      <th>Price</th>
+      <th>High 24h</th>
+      <th>Low 24h</th>
+      <th>1h</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th>1y</th>
+    </tr>
+  </thead>
+<tbody>
+    <tr>
+        <td>{{coin.rating}}</td>
+        <td><img src="{{coin.pr.img_thumb}}" alt="logo"> <a href="{{coin.pr.homepage}}">{{coin.name}}</a></td>
+        <td>
+            {% if coin.price < 0.01 %}
+            $ {{ '%.8f'|format(coin.price) }}
+            {% else %}
+            $ {{ coin.price | format_number }}
+            {% endif %}
+        </td>
+        <td>$ {{coin.high_24h | format_number }}</td>
+        <td>$ {{coin.low_24h | format_number }}</td>
+          {% macro price_change(value) %}
+          {% if value < 0 %}
+            <span style="color: red">{{ value | round(2) }} %</span>
+          {% elif value > 0 %}
+            <span style="color: green">{{ value | round(2) }} %</span>
+          {% else %}
+            <span>{{ value | round(2) }} %</span>
+          {% endif %}
+          {% endmacro %}
+
+        <td>{{price_change(coin.usd_1h_change)}}</td>
+        <td>{{price_change(coin.usd_24h_change)}}</td>
+        <td>{{price_change(coin.usd_7d_change)}}</td>
+        <td>{{price_change(coin.usd_30d_change)}}</td>
+        <td>{{price_change(coin.usd_1y_change)}}</td>
+    </tr>
+</tbody>
+</table>
+<!--Графік ціни-->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script>const data = {{ data | tojson }};</script>
+<div id="myPlot"></div>
+<script>buildPlot(data);</script>
+<!--блок з конвектором валют-->
+    <script>
+        const coinPrice = {{ coin.price|tojson }};
+    </script>
+<div class="converter">
+  <div class="title">{{coin.name}} Converter</div>
+  <div class="input-container">
+    <label class="currency-label">{{coin.symbol|upper}}:</label>
+    <input type="number" class="input-field" id="coinInput">
+  </div>
+  <div class="input-container">
+    <label class="currency-label">USD:</label>
+    <input type="number" class="input-field" id="usdInput">
+  </div>
+  <div id="result"></div>
+</div>
+  <script src="{{ url_for('static', filename='js/convert.js') }}"></script>
+<!--Блок з інформацією про максимальну ціну та інше-->
+<div class="ath">
+  <p class="all-time-high">All Time High: {{coin.ath}} $ {{price_change(coin.ath_change_percentage)}}</p>
+  {% if coin.max_supply == 0 %}
+    <p class="max-supply">Max Supply: ∞</p>
+  {% else %}
+    <p class="max-supply">Max Supply: {{coin.max_supply | round() | format_number }}</p>
+  {% endif %}
+  <p class="circulating-supply">Circulating Supply: {{coin.circulating_supply | round() | format_number}}</p>
+  <p class="market-cap">Market Cap: {{coin.market_cap | round() | format_number}} $</p>
+</div>
+<!--таблиця з торговими парами та біржами-->
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Exchange</th>
+      <th>URL</th>
+      <th>Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for tp in db_result.items %}
+      <tr>
+        <td class="id-column">{{ loop.index }}</td>
+        <td><img src="{{tp.image}}" alt="logo"> <a href="{{ tp.url }}">{{ tp.name }}</a></td>
+        {% if tp.base | length > 5 or tp.target | length > 5 %}
+          <td><a href="{{ tp.trade_url }}">{{tp.base[:3] + '...' + tp.base[-3:]}}/{{tp.target[:3] + '...' + tp.target[-3:]}}</a></td>
+        {% else %}
+          <td><a href="{{ tp.trade_url }}">{{ tp.base }}/{{ tp.target }}</a></td>
+        {% endif %}
+        <td>{{ tp.volume | round | format_number }} $</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<!--Пагінація сторінок-->
+<div class="pagination">
+    {{ pagination.links }}
+</div>
+</body>
+{% endblock %}
